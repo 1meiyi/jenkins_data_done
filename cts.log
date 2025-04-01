@@ -1,0 +1,48 @@
+ERROR:root:s80-OPENCL_MUSA_API failed: 1条
+INFO:root:s80-OPENCL_MUSA_API 失败测试用例:['test_opencl_cts_on_musa[binary_two_results_i_double-2-3]']
+INFO:root:s80-OPENCL_MUSA_API passed case: 6584 条
+INFO:root:s80-MUSA_THIRD_PARTY_AND_HIP_TEST passed case: 622 条
+ERROR:root:s80-MUSA_FUNCTIONAL failed: 2条
+INFO:root:s80-MUSA_FUNCTIONAL 失败测试用例:['test_functional_test[cuGraphAddKernelNode]', 'test_functional_test[musa_runTimeout]']
+INFO:root:s80-MUSA_FUNCTIONAL passed case: 202 条
+ERROR:root:s80-ptsz failed: 36条
+INFO:root:s80-ptsz 失败测试用例:['test_musa_cuda_samples_7_CUDALIBRARIES[conjugateGradientUM]', 'test_musa_cuda_samples_0_SIMPLE[dmmaTensorCoreGemm]', 'test_musa_mtcc_function_call[call_sharedMemory_7]', 'test_musa_mtcc_function_call[call_privateMemory_6]', 'test_musa_mtcc_function_call[call_privateMemory_4]', 'test_musa_mtcc_function_call[call_atomic_n9]', 'test_musa_mtcc_function_call[call_atomic_7]', 'test_musa_mtcc_function_call[call_privateMemory_3]', 'test_musa_mtcc_function_call[call_privateMemory_5]', 'test_musa_cuda_samples_7_CUDALIBRARIES[conjugateGradientCudaGraphs]', 'test_musa_cuda_samples_0_SIMPLE[simpleMPI]', 'test_musa_mtcc_function_call[call_multiPara_tpe]', 'test_musa_cuda_samples_7_CUDALIBRARIES[simpleCUFFT_callback]', 'test_musa_cuda_samples_7_CUDALIBRARIES[conjugateGradient]', 'test_musa_mtcc_function_call[call_atomic_2]', 'test_musa_mtcc_function_call[call_atomic_5]', 'test_musa_mtcc_function_call[call_sharedMemory_8]', 'test_musa_mtcc_function_call[call_sharedMemory_5]', 'test_musa_mtcc_function_call[call_atomic_9]', 'test_musa_mtcc_function_call[call_sharedMemory_2]', 'test_musa_mtcc_function_call[call_atomic_3]', 'test_musa_mtcc_function_call[call_atomic_8]', 'test_musa_mtcc_function_call[call_atomic_4]', 'test_musa_cuda_samples_4_FINANCE[MonteCarloMultiGPU]', 'test_musa_mtcc_function_call[call_sharedMemory_3]', 'test_musa_mtcc_function_call[call_privateMemory_2]', 'test_musa_mtcc_function_call[call_multiPara_atoAdd]', 'test_musa_cuda_samples_0_SIMPLE[globalToShmemAsyncCopy]', 'test_musa_mtcc_function_call[call_privateMemory_8]', 'test_musa_mtcc_function_call[call_sharedMemory_11]', 'test_musa_mtcc_function_call[call_privateMemory_7]', 'test_musa_mtcc_function_call[call_atomic_6]', 'test_musa_mtcc_function_call[call_sharedMemory_4]', 'test_musa_mtcc_function_call[call_sharedMemory_9]', 'test_musa_mtcc_function_call[call_sharedMemory_10]', 'test_musa_mtcc_function_call[call_sharedMemory_6]']
+INFO:root:s80-ptsz passed case: 967 条
+WARNING:root:s80-ptsz broken case: 6 条
+ERROR:root:s80-MUSA_STRESS_TEST failed: 1条
+INFO:root:s80-MUSA_STRESS_TEST 失败测试用例:['test_stress[rt_attribute_check]']
+INFO:root:s80-MUSA_STRESS_TEST passed case: 361 条
+ERROR:root:s80-cuda_sample-测试异常
+ERROR:root:s3000-OPENCL_MUSA_API failed: 2条
+INFO:root:s3000-OPENCL_MUSA_API 失败测试用例:['test_opencl_cts_on_musa[binary_two_results_i_double-1-3]', 'test_opencl_cts_on_musa[binary_two_results_i_double-3-3]']
+INFO:root:s3000-OPENCL_MUSA_API passed case: 6583 条
+INFO:root:s3000-MUSA_THIRD_PARTY_AND_HIP_TEST passed case: 622 条
+ERROR:root:s3000-MUSA_FUNCTIONAL failed: 2条
+INFO:root:s3000-MUSA_FUNCTIONAL 失败测试用例:['test_functional_test[musa_runTimeout]', 'test_functional_test[cuGraphAddKernelNode]']
+INFO:root:s3000-MUSA_FUNCTIONAL passed case: 202 条
+ERROR:root:s3000-ptsz failed: 36条
+INFO:root:s3000-ptsz 失败测试用例:['test_musa_mtcc_function_call[call_atomic_2]', 'test_musa_mtcc_function_call[call_sharedMemory_10]', 'test_musa_mtcc_function_call[call_privateMemory_4]', 'test_musa_mtcc_function_call[call_sharedMemory_9]', 'test_musa_mtcc_function_call[call_sharedMemory_2]', 'test_musa_mtcc_function_call[call_privateMemory_7]', 'test_musa_mtcc_function_call[call_atomic_6]', 'test_musa_mtcc_function_call[call_atomic_n9]', 'test_musa_mtcc_function_call[call_privateMemory_5]', 'test_musa_mtcc_function_call[call_atomic_3]', 'test_musa_mtcc_function_call[call_multiPara_tpe]', 'test_musa_cuda_samples_4_FINANCE[MonteCarloMultiGPU]', 'test_musa_mtcc_function_call[call_sharedMemory_3]', 'test_musa_cuda_samples_7_CUDALIBRARIES[conjugateGradientUM]', 'test_musa_mtcc_function_call[call_privateMemory_6]', 'test_musa_mtcc_function_call[call_privateMemory_3]', 'test_musa_mtcc_function_call[call_sharedMemory_8]', 'test_musa_mtcc_function_call[call_privateMemory_2]', 'test_musa_mtcc_function_call[call_sharedMemory_11]', 'test_musa_mtcc_function_call[call_atomic_8]', 'test_musa_mtcc_function_call[call_sharedMemory_4]', 'test_musa_mtcc_function_call[call_sharedMemory_6]', 'test_musa_mtcc_function_call[call_atomic_7]', 'test_musa_mtcc_function_call[call_sharedMemory_7]', 'test_musa_mtcc_function_call[call_atomic_9]', 'test_musa_cuda_samples_7_CUDALIBRARIES[conjugateGradient]', 'test_musa_cuda_samples_7_CUDALIBRARIES[conjugateGradientCudaGraphs]', 'test_musa_mtcc_function_call[call_atomic_5]', 'test_musa_cuda_samples_0_SIMPLE[globalToShmemAsyncCopy]', 'test_musa_cuda_samples_0_SIMPLE[simpleMPI]', 'test_musa_mtcc_function_call[call_sharedMemory_5]', 'test_musa_mtcc_function_call[call_multiPara_atoAdd]', 'test_musa_cuda_samples_0_SIMPLE[dmmaTensorCoreGemm]', 'test_musa_mtcc_function_call[call_privateMemory_8]', 'test_musa_mtcc_function_call[call_atomic_4]', 'test_musa_cuda_samples_7_CUDALIBRARIES[simpleCUFFT_callback]']
+INFO:root:s3000-ptsz passed case: 967 条
+WARNING:root:s3000-ptsz broken case: 6 条
+ERROR:root:s3000-MUSA_STRESS_TEST failed: 1条
+INFO:root:s3000-MUSA_STRESS_TEST 失败测试用例:['test_stress[rt_attribute_check]']
+INFO:root:s3000-MUSA_STRESS_TEST passed case: 361 条
+ERROR:root:s3000-cuda_sample-测试异常
+INFO:root:s4000-OPENCL_MUSA_API passed case: 6645 条
+INFO:root:s4000-MUSA_THIRD_PARTY_AND_HIP_TEST passed case: 632 条
+ERROR:root:s4000-MUSA_FUNCTIONAL failed: 2条
+INFO:root:s4000-MUSA_FUNCTIONAL 失败测试用例:['test_functional_test[cuGraphAddKernelNode]', 'test_functional_test[musa_runTimeout]']
+INFO:root:s4000-MUSA_FUNCTIONAL passed case: 202 条
+ERROR:root:s4000-ptsz-测试异常
+ERROR:root:s4000-MUSA_STRESS_TEST failed: 2条
+INFO:root:s4000-MUSA_STRESS_TEST 失败测试用例:['test_stress[module_load_default]', 'test_stress[module_load_eager]']
+INFO:root:s4000-MUSA_STRESS_TEST passed case: 380 条
+ERROR:root:s4000-cuda_sample-测试异常
+INFO:root:s5000-OPENCL_MUSA_API passed case: 6840 条
+ERROR:root:s5000-MUSA_THIRD_PARTY_AND_HIP_TEST-测试异常
+ERROR:root:s5000-MUSA_FUNCTIONAL failed: 2条
+INFO:root:s5000-MUSA_FUNCTIONAL 失败测试用例:['test_functional_test[musa_runTimeout]', 'test_functional_test[cuGraphAddKernelNode]']
+INFO:root:s5000-MUSA_FUNCTIONAL passed case: 204 条
+ERROR:root:s5000-ptsz-测试异常
+ERROR:root:s5000-MUSA_STRESS_TEST-测试异常
+ERROR:root:s5000-cuda_sample-测试异常

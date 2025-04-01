@@ -1,0 +1,65 @@
+[
+    {
+        "branch_farm": "dailyFarm",
+        "build_commit_id": "a1d37e841",
+        "build_time": "2025/04/01",
+        "build_url": "http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/915",
+        "gpu_type": "s5000",
+        "is_building": "False",
+        "status": "ABORTED"
+    },
+    {
+        "branch_farm": "releaseFarm",
+        "build_commit_id": "1c2a5149b",
+        "build_time": "2025/04/01",
+        "build_url": "http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/914",
+        "gpu_type": "s4000",
+        "is_building": "False",
+        "status": "ABORTED"
+    },
+    {
+        "branch_farm": "dailyFarm",
+        "build_commit_id": "a1d37e841",
+        "build_time": "2025/04/01",
+        "build_url": "http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/913",
+        "gpu_type": "s5000",
+        "is_building": "True",
+        "status": "FAILURE"
+    },
+    {
+        "branch_farm": "dailyFarm",
+        "build_commit_id": "a1d37e841",
+        "build_time": "2025/04/01",
+        "build_url": "http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/912",
+        "gpu_type": "s4000",
+        "is_building": "False",
+        "status": "ABORTED"
+    },
+    {
+        "branch_farm": "dailyFarm",
+        "build_commit_id": "a1d37e841",
+        "build_time": "2025/04/01",
+        "build_url": "http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/911",
+        "gpu_type": "s3000",
+        "is_building": "False",
+        "status": "FAILURE"
+    },
+    {
+        "branch_farm": "dailyFarm",
+        "build_commit_id": "a1d37e841",
+        "build_time": "2025/04/01",
+        "build_url": "http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/910",
+        "gpu_type": "s80",
+        "is_building": "False",
+        "status": "ABORTED"
+    },
+    {
+        "branch_farm": "releaseFarm",
+        "build_commit_id": "1c2a5149b",
+        "build_time": "2025/03/31",
+        "build_url": "http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/909",
+        "gpu_type": "s5000",
+        "is_building": "True",
+        "status": "FAILURE"
+    }
+]
