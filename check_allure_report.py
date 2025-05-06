@@ -8,27 +8,104 @@ import base64
 from requests.utils import dict_from_cookiejar
 import subprocess
 import logging
-
+import csv
+import pandas as pd
 data_env = {
-    'gpu_info': ['s80', 's3000', 's4000', 's5000'],
-    'cts_case': ['OPENCL_MUSA_API',
-                 'MUSA_THIRD_PARTY_AND_HIP_TEST',
-                 'MUSA_FUNCTIONAL',
-                 'ptsz',
-                 'MUSA_STRESS_TEST',
-                 'cuda_sample'],
-    'ddk_case': ['800_test_musa_cts/musa_mtcc',
-                 '801_test_mtcc_test',
-                 '822_test_muBLAS_cts',
-                 '825_test_muRAND_cts',
-                 '823_test_muFFT_cts',
-                 '828_test_muSPARSE_cts_daily',
-                 '828_test_muSPARSE_cts_weekly_part1',
-                 '828_test_muSPARSE_cts_weekly_part2',
-                 '824_test_muPP_cts',
-                 '829_test_muSOLVER_cts',
-                 '827_test_muAlg_cts',
-                 '826_test_muThrust_cts']
+    'cts_case': ['s80/800_test_musa_cts/MUSA_THIRD_PARTY_AND_HIP_TEST',
+                 's80/800_test_musa_cts/OPENCL_MUSA_API',
+                 's80/800_test_musa_cts/MUSA_STRESS_TEST'
+                 's80/800_test_musa_cts/MUSA_FUNCTIONAL',
+                 's80/800_test_musa_cts/ptsz',
+                 's3000/800_test_musa_cts/OPENCL_MUSA_API',
+                 's3000/800_test_musa_cts/MUSA_THIRD_PARTY_AND_HIP_TEST',
+                 's3000/800_test_musa_cts/MUSA_FUNCTIONAL',
+                 's3000/800_test_musa_cts/ptsz',
+                 's3000/800_test_musa_cts/MUSA_STRESS_TEST',
+                 's4000/800_test_musa_cts/OPENCL_MUSA_API',
+                 's4000/800_test_musa_cts/MUSA_THIRD_PARTY_AND_HIP_TEST',
+                 's4000/800_test_musa_cts/MUSA_FUNCTIONAL',
+                 's4000/800_test_musa_cts/ptsz',
+                 's4000/800_test_musa_cts/MUSA_STRESS_TEST',
+                 's4000/800_test_musa_cts/MULTI_DEV',
+                 's4000/test.mudnn_cts',
+                 's5000/800_test_musa_cts/OPENCL_MUSA_API',
+                 's5000/800_test_musa_cts/MUSA_THIRD_PARTY_AND_HIP_TEST',
+                 's5000/800_test_musa_cts/MUSA_FUNCTIONAL',
+                 's5000/800_test_musa_cts/ptsz',
+                 's5000/800_test_musa_cts/MUSA_STRESS_TEST',
+                 's5000/800_test_musa_cts/MULTI_DEV',
+                 's5000/test.mudnn_cts'
+                 ],
+    'ddk_case': ['s80/800_test_musa_cts/musa_mtcc',
+                 's80/801_test_mtcc_test',
+                 's80/822_test_muBLAS_cts',
+                 's80/825_test_muRAND_cts',
+                 's80/823_test_muFFT_cts',
+                 's80/828_test_muSPARSE_cts_daily',
+                 's80/828_test_muSPARSE_cts_weekly_part1',
+                 's80/828_test_muSPARSE_cts_weekly_part2',
+                 's80/824_test_muPP_cts',
+                 's80/829_test_muSOLVER_cts',
+                 's80/827_test_muAlg_cts',
+                 's80/826_test_muThrust_cts',
+                 's3000/800_test_musa_cts/musa_mtcc',
+                 's3000/801_test_mtcc_test',
+                 's3000/822_test_muBLAS_cts',
+                 's3000/825_test_muRAND_cts',
+                 's3000/823_test_muFFT_cts',
+                 's3000/828_test_muSPARSE_cts_daily',
+                 's3000/828_test_muSPARSE_cts_weekly_part1',
+                 's3000/828_test_muSPARSE_cts_weekly_part2',
+                 's3000/824_test_muPP_cts',
+                 's3000/829_test_muSOLVER_cts',
+                 's3000/827_test_muAlg_cts',
+                 's3000/826_test_muThrust_cts',
+                 's4000/800_test_musa_cts/musa_mtcc',
+                 's4000/801_test_mtcc_test',
+                 's4000/822_test_muBLAS_cts',
+                 's4000/825_test_muRAND_cts',
+                 's4000/823_test_muFFT_cts',
+                 's4000/828_test_muSPARSE_cts_daily',
+                 's4000/828_test_muSPARSE_cts_weekly_part1',
+                 's4000/828_test_muSPARSE_cts_weekly_part2',
+                 's4000/824_test_muPP_cts',
+                 's4000/829_test_muSOLVER_cts',
+                 's4000/827_test_muAlg_cts',
+                 's4000/826_test_muThrust_cts',
+                 's5000/800_test_musa_cts/musa_mtcc',
+                 's5000/801_test_mtcc_test',
+                 's5000/822_test_muBLAS_cts',
+                 's5000/825_test_muRAND_cts',
+                 's5000/823_test_muFFT_cts',
+                 's5000/828_test_muSPARSE_cts_daily',
+                 's5000/828_test_muSPARSE_cts_weekly_part1',
+                 's5000/828_test_muSPARSE_cts_weekly_part2',
+                 's5000/824_test_muPP_cts',
+                 's5000/829_test_muSOLVER_cts',
+                 's5000/827_test_muAlg_cts',
+                 's5000/826_test_muThrust_cts'],
+    'kuae_M3D': ['s5000/800_test_musa_cts/musa_mtcc',
+                 's5000/801_test_mtcc_test',
+                 's5000/822_test_muBLAS_cts',
+                 's5000/825_test_muRAND_cts',
+                 's5000/823_test_muFFT_cts',
+                 's4000/800_test_musa_cts/musa_mtcc',
+                 's4000/801_test_mtcc_test',
+                 's4000/822_test_muBLAS_cts',
+                 's4000/825_test_muRAND_cts',
+                 's4000/823_test_muFFT_cts',
+                 's3000/800_test_musa_cts/musa_mtcc',
+                 's3000/801_test_mtcc_test',
+                 's3000/822_test_muBLAS_cts',
+                 's3000/825_test_muRAND_cts',
+                 's3000/823_test_muFFT_cts',
+                 's80/800_test_musa_cts/musa_mtcc',
+                 's80/801_test_mtcc_test',
+                 's80/822_test_muBLAS_cts',
+                 's80/825_test_muRAND_cts',
+                 's80/823_test_muFFT_cts',
+                 ]
+
 }
 
 logging.basicConfig(level=logging.INFO)
@@ -92,25 +169,22 @@ class Autoinstall:
         return args
 
     def get_allure_package(self, days_offset=1, time_date=None):
+        global branch
         url_list = []
         branch = self.args_env().branch
         product = self.args_env().product
-        case_list = product + '_case'
+        if branch == 'kuae':
+            branch = 'release_KUAE_2.0_for_PH1_M3D'
+            case_list = 'kuae_M3D'
+        else:
+            case_list = product + '_case'
         if not time_date:
             t = datetime.datetime.now() - datetime.timedelta(days=days_offset)
             time_date = t.strftime("%Y-%m-%d")
-        for info in data_env['gpu_info']:
-            driver_pa = f'driver_toolkits_test/{info}'
-            for case in data_env[f'{case_list}']:
-                if product == 'cts':
-                    dict_addr = {
-                        'addr': f'/800_test_musa_cts/{case}'}
-                elif product == 'ddk':
-                    dict_addr = {
-                        'addr': f'/{case}'}
-                ddr_url = driver_pa + dict_addr['addr']
-                finally_url = self.enbase(f'computeQA/cuda_compatible/CI/{branch}/{time_date}/{ddr_url}/')
-                url_list.append(finally_url)
+        for case in data_env[f'{case_list}']:
+            finally_url = self.enbase(f'computeQA/cuda_compatible/CI/{branch}/{time_date}/driver_toolkits_test/{case}/')
+            url_list.append(finally_url)
+        #       print(url_list)
         return url_list
 
     def download_allure(self):
@@ -128,7 +202,7 @@ class Autoinstall:
                                file['name'].endswith('allure_report.tar.gz') and 'assembler' not in file['name']]
                 if allure_name:
                     for d_source in allure_name:
-                        # self.log.info(f'正在下载：https://oss.mthreads.com/release-ci/{d_source}')
+                        #                        self.log.info(f'正在下载：https://oss.mthreads.com/release-ci/{d_source}')
                         self.run_command(f'rm -rf ./testreport/*')
                         self.run_command(
                             f'wget https://oss.mthreads.com/release-ci/{d_source} -O ./testreport/{test_case[-2]}.tar.tgz')
@@ -163,9 +237,14 @@ class Autoinstall:
         count_pass = 0
         count_fail = 0
         count_broken = 0
-        count_sample_fail = 0
-        count_sample_pass = 0
+        sam_fail = 0
+        sam_pass = 0
+        ptsz_fail = 0
+        ptsz_pass = 0
         failcase = []
+
+
+
         files = self.get_all_files_scandir(path)
         for filename in files:
             if filename.endswith("-result.json"):
@@ -176,26 +255,56 @@ class Autoinstall:
                         "status": data.get("status"),
                         "case_name": data.get('parameters')[0]['value']
                     }
-
-                if test_case is None:
-                    self.log.error('获取到空字段')
+                if info.strip().split('-')[-1] == 'ptsz':
+                    if 'test_musa_ptsz' in test_case['name']:
+                        if test_case['status'] == 'failed':
+                            ptsz_fail += 1
+                        elif test_case['status'] == 'passed':
+                            ptsz_pass += 1
+                if 'test_musa_cuda_samples' in test_case['name']:
+                    if test_case['status'] == 'failed':
+                        sam_fail += 1
+                    elif test_case['status'] == 'passed':
+                        sam_pass += 1
                 elif test_case['status'] == 'failed':
                     count_fail += 1
-
                     failed_case = test_case['name']
                     failcase.append(failed_case)
                 elif test_case['status'] == 'passed':
                     count_pass += 1
                 elif test_case['status'] == 'broken':
                     count_broken += 1
-        if count_fail > 0:
-            self.log.error(f'{info} failed: {count_fail}条')
-            self.log.info(f'{info} 失败测试用例:{failcase}')
-            self.log.info(f'{info} passed case: {count_pass} 条')
-        elif count_broken > 0:
-            self.log.warning(f'{info} broken case: {count_broken} 条')
-        elif count_pass > 0:
-            self.log.info(f'{info} passed case: {count_pass} 条')
+        if info.strip().split('-')[-1] != 'ptsz':
+            if count_fail > 0:
+                self.log.error(f'{info} failed: {count_fail}条')
+                self.log.info(f'{info} 失败测试用例:{failcase}')
+                self.log.info(f'{info} passed case: {count_pass} 条')
+
+                # df = pd.DataFrame()
+                # row_df = pd.DataFrame([{'ddk_task': info,
+                #                         'passed': count_pass,
+                #                         'failed': count_fail,
+                #                         'passRating': "{:.2%}".format(count_pass / (count_pass + count_fail)),
+                #                         'failed_cases': failcase
+                #                         }])
+                #
+                # # 合并到主 DataFrame
+                # df = pd.concat([df, row_df], ignore_index=True)
+                # print(df.tail())
+
+            elif count_broken > 0:
+                self.log.warning(f'{info} broken case: {count_broken} 条')
+            elif count_pass > 0:
+                self.log.info(f'{info} passed case: {count_pass} 条')
+        if sam_pass > 0:
+            gpu_info = info.split('-')[0]
+            self.log.info(f'{gpu_info}cuda_samples faild: {sam_fail}条')
+            self.log.info(f'{gpu_info} cuda_samples pass: {sam_pass}条')
+
+        if ptsz_pass > 0:
+            self.log.info(f'{info} faild: {ptsz_fail}条')
+            self.log.info(f'{info} pass: {ptsz_pass}条')
+        print('------------------------------------------')
 
     def enbase(self, path):
         prefix = base64.urlsafe_b64encode(path.encode()).decode()
@@ -212,4 +321,3 @@ if __name__ == '__main__':
     fp.download_allure()
 
 # check_allure_report.py > op_jenkins.get_build_rs() 处理返回字典套列表的结果
-

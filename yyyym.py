@@ -1,11 +1,13 @@
 import json
 import os
-import re
 from datetime import datetime
 import jenkins
 import requests
 from dotenv import load_dotenv
 from atlassian import Confluence
+import pandas as pd
+import re
+from ast import literal_eval
 
 load_dotenv('./yi.mei.env')
 
@@ -26,13 +28,64 @@ new_build = None
 # err_result = ''
 # for build in builds:
 #     build_number = build['number']
-build_info = server.get_build_info('compute_release_ci_test_ddk2.0', 905)
+# build_info = server.get_build_info('compute_release_ci_test_ddk2.0', 1023)
+build_info = server.get_build_info('daily.musa_sdk', 196)
+# http://sh-jenkins.mthreads.com/job/daily.musa_sdk/
+# print(build_info)
 
 
+# print(confluence_table)
 
-# build_url = re.findall('http://sh-jenkins.mthreads.com/job.*?[0-9+]/',
-#                        build_info.get('description'))  # 构建与报告url
-# gpu_type = re.findall('gpu_type: (.*?)</b>', build_info.get('description'))  # gpu_type
-# print(gpu_type)
+report_date = datetime.now().strftime("%Y_%m_%d")
+def parse_log():
+    with open('./ddk.log', 'r', encoding='utf-8') as f:
+        log_str = f.read()
+    tests = []
+    current_test = {}
+    test_name_pattern = re.compile(r'(INFO|ERROR):root:([\w-]+)')
+    failed_pattern = re.compile(r'failed: (\d+)')
+    passed_pattern = re.compile(r'passed case: (\d+)')
+    failed_cases_pattern = re.compile(r'失败测试用例:(.*?\'])')
 
-# print(f'http://sh-jenkins.mthreads.com/job/compute_release_ci_test_ddk2.0/{build_number}')
+    for block in log_str.split('------------------------------------------'):
+        if match := test_name_pattern.search(block):
+            status, test_name = match.groups()
+            if test_name != current_test.get('task Name'):
+                if current_test:
+                    # 计算通过率
+                    total = current_test['passed cases'] + current_test['failed cases']
+                    rating = (current_test['passed cases'] / total * 100) if total != 0 else 0.0
+                    current_test['task rating'] = f"{rating:.2f}%"
+                    tests.append(current_test)
+                current_test = {
+                    'task Name': test_name,
+                    'passed cases': 0,
+                    'failed cases': 0,
+                    'task rating': '',
+                    'failed test cases': ''
+                }
+        if match := failed_pattern.search(block):
+            current_test['failed cases'] = int(match.group(1))
+        if match := passed_pattern.search(block):
+            current_test['passed cases'] = int(match.group(1))
+        if match := failed_cases_pattern.findall(block):
+            try:
+                cases = literal_eval(match[0])
+                current_test['failed test cases'] = cases
+            except:
+                current_test['failed test cases'] = 'N/A'
+    if current_test:
+        total = current_test['passed cases'] + current_test['failed cases']
+        rating = (current_test['passed cases'] / total * 100) if total != 0 else 0.0
+        current_test['task rating'] = f"{rating:.2f}%"
+        tests.append(current_test)
+
+    return pd.DataFrame(tests)
+# 生成 DataFrame
+df = parse_log()
+
+# 导出到Excel
+df.to_excel(f"{report_date}_test_results.xlsx", index=False)
+print(df)
+
+
